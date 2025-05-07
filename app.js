@@ -1,5 +1,3 @@
-// app.js
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const userData = require('./userData');
@@ -9,7 +7,7 @@ const port = 3000;
 
 app.use(bodyParser.json());
 
-// CREATE
+
 app.post('/users', (req, res) => {
     const { name, email } = req.body;
     if (!name || !email) return res.status(400).json({ message: 'Champs requis : name, email' });
@@ -18,33 +16,33 @@ app.post('/users', (req, res) => {
     res.status(201).json(user);
 });
 
-// READ ALL
+
 app.get('/users', (req, res) => {
     res.json(userData.getAllUsers());
 });
 
-// READ ONE
+
 app.get('/users/:id', (req, res) => {
     const user = userData.getUserById(parseInt(req.params.id));
     if (!user) return res.status(404).json({ message: 'Utilisateur non trouvé' });
     res.json(user);
 });
 
-// UPDATE
+
 app.put('/users/:id', (req, res) => {
     const updatedUser = userData.updateUser(parseInt(req.params.id), req.body);
     if (!updatedUser) return res.status(404).json({ message: 'Utilisateur non trouvé' });
     res.json(updatedUser);
 });
 
-// DELETE
+
 app.delete('/users/:id', (req, res) => {
     const deletedUser = userData.deleteUser(parseInt(req.params.id));
     if (!deletedUser) return res.status(404).json({ message: 'Utilisateur non trouvé' });
     res.json(deletedUser);
 });
 
-// Lancement du serveur
+
 app.listen(port, () => {
     console.log(`Serveur en ligne sur http://localhost:${port}`);
 });

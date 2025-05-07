@@ -1,5 +1,3 @@
-// userData.js
-
 let users = [
     {
         id: 1, 
